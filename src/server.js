@@ -7,6 +7,8 @@ import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import notesRoutes from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
+import authRoutes from './routes/authRoutes.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -16,7 +18,9 @@ await connectMongoDB();
 app.use(logger);
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
+app.use(authRoutes);
 app.use(notesRoutes);
 
 app.use(notFoundHandler);
