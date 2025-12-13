@@ -28,6 +28,6 @@ export const authenticate = async (req, res, next) => {
     return next(createHttpError(401));
   }
 
-  req.user;
+  req.user = user;
   next();
 };
